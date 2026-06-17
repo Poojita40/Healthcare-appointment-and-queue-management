@@ -35,24 +35,6 @@ public class DataSeeder implements CommandLineRunner {
             System.out.println("Seeded Admin: admin@smartcare.com");
         }
 
-        if (userRepository.findByEmail("arvind.sharma@smartcare.com").isEmpty()) {
-            User doc1 = new User();
-            doc1.setName("Dr. Arvind Sharma");
-            doc1.setEmail("arvind.sharma@smartcare.com");
-            doc1.setPassword(passwordEncoder.encode("password123"));
-            doc1.setRole("DOCTOR");
-            userRepository.save(doc1);
-        }
-
-        if (userRepository.findByEmail("priya.patel@smartcare.com").isEmpty()) {
-            User doc2 = new User();
-            doc2.setName("Dr. Priya Patel");
-            doc2.setEmail("priya.patel@smartcare.com");
-            doc2.setPassword(passwordEncoder.encode("password123"));
-            doc2.setRole("DOCTOR");
-            userRepository.save(doc2);
-        }
-
         if (userRepository.findByEmail("patient@smartcare.com").isEmpty()) {
             User patient = new User();
             patient.setName("Demo Patient");
@@ -62,17 +44,33 @@ public class DataSeeder implements CommandLineRunner {
             userRepository.save(patient);
         }
 
+        seedDoctorUser("Dr. Arvind Sharma", "arvind.sharma@smartcare.com");
+        seedDoctorUser("Dr. Meera Nair", "meera.nair@smartcare.com");
+        seedDoctorUser("Dr. Rajesh K.", "rajesh.k@smartcare.com");
+        seedDoctorUser("Dr. Sarah D'Souza", "sarah.dsouza@smartcare.com");
+        seedDoctorUser("Dr. Amit Verma", "amit.verma@smartcare.com");
+        seedDoctorUser("Dr. Priya Patel", "priya.patel@smartcare.com");
+
         // ── Doctors ────────────────────────────────────────────────────────
         if (doctorRepository.count() == 0) {
-            seedDoctor("Dr. Arvind Sharma",   "Cardiology",       "MBBS, MD",       "12 years",  "arvind.sharma@smartcare.com",  "+91-9000000001", "Mon-Fri 9am-5pm");
-            seedDoctor("Dr. Priya Patel",     "Dermatology",      "MBBS, MD",       "8 years",   "priya.patel@smartcare.com",    "+91-9000000002", "Mon-Sat 10am-4pm");
-            seedDoctor("Dr. Rajan Mehta",     "Neurology",        "MBBS, DM",       "15 years",  "rajan.mehta@smartcare.com",    "+91-9000000003", "Tue-Sat 11am-6pm");
-            seedDoctor("Dr. Sunita Rao",      "Pediatrics",       "MBBS, DCH",      "10 years",  "sunita.rao@smartcare.com",     "+91-9000000004", "Mon-Fri 8am-3pm");
-            seedDoctor("Dr. Vikram Singh",    "Orthopedics",      "MBBS, MS",       "20 years",  "vikram.singh@smartcare.com",   "+91-9000000005", "Mon-Thu 9am-5pm");
-            seedDoctor("Dr. Ananya Krishnan", "Gynecology",       "MBBS, MS",       "11 years",  "ananya.krishnan@smartcare.com","+91-9000000006", "Mon-Fri 10am-5pm");
-            seedDoctor("Dr. Rohan Gupta",     "Ophthalmology",    "MBBS, MS",       "7 years",   "rohan.gupta@smartcare.com",    "+91-9000000007", "Mon-Sat 9am-2pm");
-            seedDoctor("Dr. Meera Joshi",     "ENT",              "MBBS, MS",       "9 years",   "meera.joshi@smartcare.com",    "+91-9000000008", "Tue-Sat 10am-5pm");
-            System.out.println("Seeded 8 doctors successfully.");
+            seedDoctor("Dr. Arvind Sharma", "Cardiology", "MD, DM (Cardiology) - AIIMS", "15 Years", "arvind.sharma@smartcare.com", "9876543210", "Mon, Wed, Fri (9:00 AM - 1:00 PM)");
+            seedDoctor("Dr. Meera Nair", "Pediatrics", "MBBS, DCH, MD (Pediatrics)", "12 Years", "meera.nair@smartcare.com", "9876543211", "Tue, Thu, Sat (10:00 AM - 3:00 PM)");
+            seedDoctor("Dr. Rajesh K.", "Orthopedics", "MS (Orthopedics), M.Ch (Joint Replacement)", "18 Years", "rajesh.k@smartcare.com", "9876543212", "Mon to Fri (2:00 PM - 6:00 PM)");
+            seedDoctor("Dr. Sarah D'Souza", "Dermatology", "MD, DNB (Dermatology)", "9 Years", "sarah.dsouza@smartcare.com", "9876543213", "Wed, Thu, Sat (4:00 PM - 8:00 PM)");
+            seedDoctor("Dr. Amit Verma", "General Physician", "MD (Medicine)", "14 Years", "amit.verma@smartcare.com", "9876543214", "Mon to Sat (9:00 AM - 5:00 PM)");
+            seedDoctor("Dr. Priya Patel", "Neurology", "MD, DM (Neurology)", "11 Years", "priya.patel@smartcare.com", "9876543215", "Tue, Fri (1:00 PM - 5:00 PM)");
+            System.out.println("Seeded original 6 doctors successfully.");
+        }
+    }
+
+    private void seedDoctorUser(String name, String email) {
+        if (userRepository.findByEmail(email).isEmpty()) {
+            User doc = new User();
+            doc.setName(name);
+            doc.setEmail(email);
+            doc.setPassword(passwordEncoder.encode("password123"));
+            doc.setRole("DOCTOR");
+            userRepository.save(doc);
         }
     }
 
