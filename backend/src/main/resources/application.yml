@@ -5,25 +5,24 @@ spring:
   application:
     name: smartcare-service
 
-  # Database — uses PostgreSQL on Render (DATABASE_URL), falls back to H2 locally
   datasource:
-    url: ${DATABASE_URL:jdbc:h2:file:./data/smartcare_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;CASE_INSENSITIVE_IDENTIFIERS=TRUE}
-    driverClassName: ${DB_DRIVER:org.h2.Driver}
-    username: ${DB_USERNAME:sa}
-    password: ${DB_PASSWORD:password}
+    url: jdbc:h2:file:./data/smartcare_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;CASE_INSENSITIVE_IDENTIFIERS=TRUE;AUTO_RECONNECT=TRUE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
 
   h2:
     console:
-      enabled: ${H2_CONSOLE_ENABLED:true}
+      enabled: true
       path: /h2-console
       settings:
         web-allow-others: true
 
   jpa:
-    database-platform: ${DB_DIALECT:org.hibernate.dialect.H2Dialect}
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
-    show-sql: false
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
@@ -31,8 +30,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${MAIL_USERNAME:admin@smartcare.com}
-    password: ${MAIL_PASSWORD:YOUR_APP_PASSWORD}
+    username: admin@smartcare.com
+    password: YOUR_APP_PASSWORD
     properties:
       mail:
         smtp:
@@ -40,7 +39,6 @@ spring:
           starttls:
             enable: true
 
-# Logging Configurations
 logging:
   level:
     org.springframework.security: INFO
