@@ -121,6 +121,52 @@ export default function BookAppointment() {
     }
   };
 
+  // Enforce tomorrow/future dates restriction for sanity
+  const getMinDateString = () => {
+    const today = new Date();
+    // Format to YYYY-MM-DD
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  };
+
+  const availableSlots = React.useMemo(() => {
+    const slots = [];
+    const now = new Date();
+    const isToday = appointmentDate === getMinDateString();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+
+    for (let h = 9; h <= 22; h++) {
+      for (let m of [0, 30]) {
+        if (h === 22 && m === 30) continue; // End exactly at 10:00 PM
+
+        if (isToday) {
+          if (h < currentHour || (h === currentHour && m <= currentMinute)) {
+            continue;
+          }
+        }
+
+        const timeString = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        const displayH = h > 12 ? h - 12 : h;
+        const displayString = `${displayH.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')} ${ampm}`;
+        
+        slots.push({ value: timeString, label: displayString });
+      }
+    }
+    return slots;
+  }, [appointmentDate]);
+
+  useEffect(() => {
+    if (availableSlots.length > 0 && !availableSlots.some(slot => slot.value === appointmentTime)) {
+      setAppointmentTime(availableSlots[0].value);
+    } else if (availableSlots.length === 0 && appointmentTime !== '') {
+      setAppointmentTime('');
+    }
+  }, [availableSlots, appointmentTime]);
+
   if (loading) {
     return (
       <div className="flex h-screen bg-slate-50">
@@ -432,52 +478,6 @@ The SmartCare Clinical Operations Team`
       </div>
     );
   }
-
-  // Enforce tomorrow/future dates restriction for sanity
-  const getMinDateString = () => {
-    const today = new Date();
-    // Format to YYYY-MM-DD
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const dd = String(today.getDate()).padStart(2, '0');
-    return `${yyyy}-${mm}-${dd}`;
-  };
-
-  const availableSlots = React.useMemo(() => {
-    const slots = [];
-    const now = new Date();
-    const isToday = appointmentDate === getMinDateString();
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-
-    for (let h = 9; h <= 22; h++) {
-      for (let m of [0, 30]) {
-        if (h === 22 && m === 30) continue; // End exactly at 10:00 PM
-
-        if (isToday) {
-          if (h < currentHour || (h === currentHour && m <= currentMinute)) {
-            continue;
-          }
-        }
-
-        const timeString = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
-        const ampm = h >= 12 ? 'PM' : 'AM';
-        const displayH = h > 12 ? h - 12 : h;
-        const displayString = `${displayH.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')} ${ampm}`;
-        
-        slots.push({ value: timeString, label: displayString });
-      }
-    }
-    return slots;
-  }, [appointmentDate]);
-
-  useEffect(() => {
-    if (availableSlots.length > 0 && !availableSlots.some(slot => slot.value === appointmentTime)) {
-      setAppointmentTime(availableSlots[0].value);
-    } else if (availableSlots.length === 0 && appointmentTime !== '') {
-      setAppointmentTime('');
-    }
-  }, [availableSlots, appointmentTime]);
 
   return (
     <div className="flex h-screen bg-slate-100 font-sans" id="sc-booking-root">
