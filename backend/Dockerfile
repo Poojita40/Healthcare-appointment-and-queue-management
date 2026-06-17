@@ -2,9 +2,9 @@
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 
-# Copy the pom.xml and source code
-COPY pom.xml .
-COPY src ./src
+# Copy the pom.xml and source code from backend directory
+COPY backend/pom.xml .
+COPY backend/src ./src
 
 # Package the application (skip tests for faster deployment)
 RUN mvn clean package -DskipTests
