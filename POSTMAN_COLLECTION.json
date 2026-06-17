@@ -1,0 +1,120 @@
+{
+  "info": {
+    "_postman_id": "ad64ef72-181a-4d7a-ae00-36df016bcfa1",
+    "name": "SmartCare Queue REST API Systems",
+    "description": "Full collection encompassing active registration channels, logins, schedule engines, and patient queueing parameters in SmartCare.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register Patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Rahul Sen\",\n  \"email\": \"patient.demo@smartcare.com\",\n  \"password\": \"secured123\",\n  \"phone\": \"9988776655\",\n  \"age\": 32,\n  \"gender\": \"Male\",\n  \"address\": \"New Delhi, India\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"patient@smartcare.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Doctor Handlers",
+      "item": [
+        {
+          "name": "Fetch Doctor Records",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/doctors",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "doctors"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Queue Manager",
+      "item": [
+        {
+          "name": "Get Live Room Status",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/queue",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "queue"]
+            }
+          }
+        },
+        {
+          "name": "Advance / Call Next Patient",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"doctorId\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/queue/next",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "queue", "next"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
