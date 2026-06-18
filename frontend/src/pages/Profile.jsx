@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { User, Contact, Phone, Landmark, Save, HelpCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-export default function Profile() {
+export default function Profile({ onMenuClick }) {
   const { user, updateProfile } = useAuth();
 
   const [form, setForm] = useState({
@@ -44,11 +44,13 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex h-screen bg-slate-100 font-sans" id="sc-profile-root">
-      <Sidebar />
+    <div className="min-h-screen flex bg-[#F8FAFC]" id="sc-profile-root">
+      <div className="hidden md:block">
+        <Sidebar />
+      </div>
 
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        <Topbar title="Profile Settings" />
+        <Topbar title="Profile Settings" onMenuClick={onMenuClick} />
 
         <main className="p-6 flex-1 max-w-3xl w-full mx-auto space-y-6">
 

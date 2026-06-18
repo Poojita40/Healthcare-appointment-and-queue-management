@@ -9,7 +9,7 @@ import { useAuth } from '../context/AuthContext';
 import { Timer, ArrowUpRight, Activity } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-export default function QueueTracking() {
+export default function QueueTracking({ onMenuClick }) {
   const { user } = useAuth();
   const [queues, setQueues] = useState([]);
   const [appointments, setAppointments] = useState([]);
@@ -41,11 +41,12 @@ export default function QueueTracking() {
   const currentActive = appointments.find((a) => a.status === 'PENDING' || a.status === 'CONFIRMED');
 
   return (
-    <div className="flex h-screen bg-slate-100 font-sans" id="sc-tracking-root">
-      <Sidebar />
-
+    <div className="min-h-screen flex bg-[#F8FAFC]">
+      <div className="hidden md:block">
+        <Sidebar />
+      </div>
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        <Topbar title="Real-Time Token Monitor" />
+        <Topbar title="Real-Time Token Monitor" onMenuClick={onMenuClick} />
 
         <main className="p-6 flex-1 max-w-4xl w-full mx-auto space-y-6">
 

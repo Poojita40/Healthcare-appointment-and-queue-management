@@ -14,7 +14,7 @@ import {
   Activity
 } from 'lucide-react';
 
-export default function Sidebar() {
+export default function Sidebar({ onClose }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-64 bg-slate-950 text-slate-400 border-r border-slate-800 min-h-screen hidden md:flex flex-col justify-between shrink-0" id="sc-dashboard-sidebar">
+    <aside className="w-64 bg-slate-950 text-slate-400 border-r border-slate-800 min-h-screen flex flex-col justify-between shrink-0" id="sc-dashboard-sidebar">
       <div className="p-6">
         {/* Sidebar Brand header */}
         <div className="flex items-center gap-2 mb-8">
@@ -78,6 +78,9 @@ export default function Sidebar() {
                     : 'text-slate-400 hover:bg-slate-900/60 hover:text-white'
                   }
                 `}
+                onClick={() => {
+                  if (onClose) onClose();
+                }}
               >
                 <Icon className="w-4.5 h-4.5 shrink-0" />
                 {link.label}

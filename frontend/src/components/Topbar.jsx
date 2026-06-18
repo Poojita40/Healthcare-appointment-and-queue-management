@@ -46,7 +46,7 @@ export default function Topbar({ title = 'Dashboard Overview', onMenuClick }) {
   return (
     <header className="bg-white border-b border-gray-100 h-16 flex items-center justify-between px-6 shrink-0 relative" id="sc-dashboard-topbar">
       {/* Mobile menu button */}
-      <button onClick={onMenuClick} className="p-2 rounded-md hover:bg-slate-100 focus:outline-none">
+      <button onClick={onMenuClick} className="p-2 rounded-md hover:bg-slate-100 focus:outline-none md:hidden">
         <Menu className="w-5 h-5 text-slate-600" />
       </button>
 

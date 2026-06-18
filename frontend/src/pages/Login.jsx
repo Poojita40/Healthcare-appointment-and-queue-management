@@ -91,6 +91,10 @@ export default function Login() {
       setEmail('admin@smartcare.com');
       setPassword('password123');
       toast.success('System Admin credentials loaded. Click Login!');
+    } else if (role === 'PATIENT') {
+      setEmail('rohan.kumar@example.com');
+      setPassword('password123');
+      toast.success('Patient credentials loaded. Click Login!');
     }
   };
 
@@ -268,7 +272,21 @@ export default function Login() {
             )}
 
             {(!roleParam || !['DOCTOR', 'PATIENT', 'ADMIN'].includes(roleParam)) && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => autofillCredentials('PATIENT')}
+                  className="text-[10px] font-bold py-2 bg-blue-50 text-blue-750 hover:bg-blue-100/80 rounded-lg active:scale-95 transition-all text-center border border-blue-100/50 cursor-pointer"
+                >
+                  Patient Login
+                </button>
+                <button
+                  type="button"
+                  onClick={() => autofillCredentials('ADMIN')}
+                  className="text-[10px] font-bold py-2 bg-purple-50 text-purple-750 hover:bg-purple-100/80 rounded-lg active:scale-95 transition-all text-center border border-purple-100/50 cursor-pointer"
+                >
+                  Admin Access
+                </button>
                 <button
                   type="button"
                   onClick={() => autofillCredentials('DOCTOR', 'ARVIND')}
@@ -282,13 +300,6 @@ export default function Login() {
                   className="text-[10px] font-bold py-2 bg-teal-50 text-teal-750 hover:bg-teal-100/80 rounded-lg active:scale-95 transition-all text-center border border-teal-100/50 cursor-pointer"
                 >
                   Dr. Priya (F)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => autofillCredentials('ADMIN')}
-                  className="text-[10px] font-bold py-2 bg-purple-50 text-purple-750 hover:bg-purple-100/80 rounded-lg active:scale-95 transition-all text-center border border-purple-100/50 cursor-pointer"
-                >
-                  Admin Access
                 </button>
               </div>
             )}

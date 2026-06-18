@@ -56,13 +56,16 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        {/* Mobile Sidebar Overlay Backdrop */}
+        {sidebarOpen && (
+          <div 
+            className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 md:hidden" 
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
         {/* Mobile Sidebar Drawer */}
-        <div className={`fixed inset-y-0 left-0 w-64 bg-slate-950 text-slate-400 border-r border-slate-800 transform transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`} id="mobile-sidebar">
-          <Sidebar />
-        </div>
-        {/* Desktop Sidebar */}
-        <div className="hidden">
-          <Sidebar />
+        <div className={`fixed inset-y-0 left-0 w-64 bg-slate-950 text-slate-400 border-r border-slate-800 transform transition-transform duration-300 z-50 md:hidden ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`} id="mobile-sidebar">
+          <Sidebar onClose={() => setSidebarOpen(false)} />
         </div>
         <Routes>
           {/* Public Landing Pages */}
