@@ -219,11 +219,6 @@ export default function Login() {
                 className="w-full text-xs font-medium text-gray-800 bg-transparent border-none outline-none p-0 mt-1"
                 id="login-email-input"
                 autoComplete="username"
-                placeholder={
-                  roleParam === 'ADMIN' ? 'admin@smartcare.com' :
-                  roleParam === 'DOCTOR' ? 'doctor@smartcare.com' :
-                  'patient@example.com'
-                }
               />
             </div>
 
@@ -239,7 +234,6 @@ export default function Login() {
                 className="w-full text-xs font-semibold text-gray-800 bg-transparent border-none outline-none p-0 mt-1"
                 id="login-password-input"
                 autoComplete="current-password"
-                placeholder="••••••••"
               />
             </div>
 

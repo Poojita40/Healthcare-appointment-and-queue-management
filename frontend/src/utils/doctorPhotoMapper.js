@@ -19,16 +19,16 @@ export const DOCTOR_PHOTOS_MAPPING = {
   // Dr. Meera Nair - Female pediatrician
   "Dr. Meera Nair": "https://images.unsplash.com/photo-1591604021695-0c69b7c05981?auto=format&fit=crop&q=80&w=400",
 
-  // Dr. Sarah D'Souza - Female dermatologist
-  "Dr. Sarah D'Souza": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400",
+  // Dr. Sarah D'Souza - Female dermatologist (unique)
+  "Dr. Sarah D'Souza": "https://images.unsplash.com/photo-1594824813573-246434e33963?auto=format&fit=crop&q=80&w=400",
 
   // Dr. Rajesh K. - Male orthopedic surgeon
   "Dr. Rajesh K.": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400",
 
-  // Dr. Amit Verma - Male general physician (verified male portrait)
-  "Dr. Amit Verma": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400",
-  "Amit Verma": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400",
-  "Dr. Amit": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400"
+  // Dr. Amit Verma - Male general physician (verified male portrait, unique)
+  "Dr. Amit Verma": "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=400",
+  "Amit Verma": "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=400",
+  "Dr. Amit": "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=400"
 };
 
 /**
