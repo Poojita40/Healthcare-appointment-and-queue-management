@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import { MessageSquare, X, Send, Bot, Sparkles, User, AlertCircle, Loader } from 'lucide-react';
 import axios from 'axios';
 import { API_BASE_URL } from '../utils/constants';

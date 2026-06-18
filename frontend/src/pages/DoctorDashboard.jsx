@@ -30,8 +30,8 @@ export default function DoctorDashboard() {
   const [doctorProfile, setDoctorProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Hardcode doctor ID matching Dr. Arvind Sharma (ID: 1) or dynamically binding if possible
-  const doctorId = user?.doctorId || 1; 
+  // Dynamically bound doctor ID from auth session
+  const doctorId = user?.doctorId || user?.id || 1;  
 
   const loadData = async () => {
     try {

@@ -32,6 +32,10 @@ public class AppointmentService {
     private EmailService emailService;
 
     public Appointment bookAppointment(Appointment appt) {
+        if (appointmentRepository.existsByDoctorIdAndAppointmentDateAndAppointmentTime(appt.getDoctorId(), appt.getAppointmentDate(), appt.getAppointmentTime())) {
+            throw new RuntimeException("This time slot is already booked for the selected doctor.");
+        }
+
         // Find or create Doctor's queue
         Queue q = queueRepository.findByDoctorId(appt.getDoctorId())
                 .orElseGet(() -> {

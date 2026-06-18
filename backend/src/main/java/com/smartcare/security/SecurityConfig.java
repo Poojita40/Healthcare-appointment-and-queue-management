@@ -25,8 +25,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/api/auth/**", "/h2-console/**").permitAll()
-                .requestMatchers("/api/doctors/**").permitAll()
-                .requestMatchers("/api/queue/**").permitAll()
+                .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/doctors/**").permitAll()
+                .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/queue/**").permitAll()
                 .requestMatchers("/api/contact/**").permitAll()
                 .anyRequest().authenticated()
             )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export default function FeatureCard({ icon: Icon, title, description, colorClass = 'sc-icon-badge-blue', accent = '#3b5bfc' }) {
   return (

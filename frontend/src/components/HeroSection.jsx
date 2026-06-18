@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Calendar, UserCheck, Timer, ShieldAlert, Sparkles, ArrowRight, UserCheck2, Stethoscope, Clock } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 

@@ -36,7 +36,7 @@ import {
   Eye,
   ArrowRight
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export default function Home() {
   const navigate = useNavigate();

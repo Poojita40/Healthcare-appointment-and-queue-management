@@ -4,6 +4,7 @@ import com.smartcare.dto.LoginRequest;
 import com.smartcare.dto.RegisterRequest;
 import com.smartcare.model.User;
 import com.smartcare.repository.UserRepository;
+import com.smartcare.repository.DoctorRepository;
 import com.smartcare.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,9 @@ public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private DoctorRepository doctorRepository;
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody RegisterRequest req) {
@@ -42,6 +46,11 @@ public class AuthController {
         userMap.put("age", user.getAge());
         userMap.put("gender", user.getGender());
         userMap.put("address", user.getAddress());
+
+        if ("DOCTOR".equals(user.getRole())) {
+            doctorRepository.findByEmail(user.getEmail())
+                    .ifPresent(doc -> userMap.put("doctorId", doc.getId()));
+        }
 
         Map<String, Object> response = new HashMap<>();
         response.put("token", token);

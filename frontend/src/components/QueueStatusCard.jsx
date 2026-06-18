@@ -1,7 +1,7 @@
 import React from 'react';
 import { Timer, Users, RefreshCw, Layers, Activity } from 'lucide-react';
 import { formatToken, estimateWaitTime } from '../utils/helpers';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export default function QueueStatusCard({ queue, yourTokenNumber = null, onRefresh }) {
   if (!queue) return null;

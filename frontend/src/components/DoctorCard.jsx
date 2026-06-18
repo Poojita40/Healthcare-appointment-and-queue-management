@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calendar, Award, Clock, ArrowRight, Star } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { getDoctorPhoto } from '../utils/doctorPhotoMapper';
 
 export default function DoctorCard({ doctor, onBookClick }) {
