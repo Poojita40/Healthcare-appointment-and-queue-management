@@ -276,46 +276,42 @@ export default function Login() {
                 Developer Evaluation Accounts
               </p>
 
-              {roleParam === 'DOCTOR' && (
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {INITIAL_DOCTORS.map((doc, idx) => {
-                    const colors = [
-                      'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border-emerald-100',
-                      'bg-teal-50 text-teal-700 hover:bg-teal-100 border-teal-100',
-                      'bg-cyan-50 text-cyan-700 hover:bg-cyan-100 border-cyan-100',
-                      'bg-blue-50 text-blue-700 hover:bg-blue-100 border-blue-100',
-                      'bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border-indigo-100',
-                      'bg-violet-50 text-violet-700 hover:bg-violet-100 border-violet-100',
-                    ];
-                    return (
-                      <button
-                        key={doc.id}
-                        type="button"
-                        onClick={() => {
-                          setEmail(doc.email);
-                          setPassword('password123');
-                          toast.success(`${doc.name} credentials loaded!`);
-                        }}
-                        className={`text-[10px] font-bold py-2 rounded-lg active:scale-95 transition-all text-center border cursor-pointer ${colors[idx % colors.length]}`}
-                      >
-                        {doc.name}
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
+              <div className="flex justify-center mb-3">
+                <button
+                  type="button"
+                  onClick={() => autofillCredentials('ADMIN')}
+                  className="w-full text-[10px] font-bold py-2.5 bg-purple-50 text-purple-700 hover:bg-purple-100 rounded-lg active:scale-95 transition-all text-center border border-purple-100 cursor-pointer shadow-xs"
+                >
+                  🔐 Admin Access — admin@smartcare.com
+                </button>
+              </div>
 
-              {roleParam === 'ADMIN' && (
-                <div className="flex justify-center">
-                  <button
-                    type="button"
-                    onClick={() => autofillCredentials('ADMIN')}
-                    className="w-full text-[10px] font-bold py-2.5 bg-purple-50 text-purple-700 hover:bg-purple-100 rounded-lg active:scale-95 transition-all text-center border border-purple-100 cursor-pointer"
-                  >
-                    🔐 Admin Access — admin@smartcare.com
-                  </button>
-                </div>
-              )}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {INITIAL_DOCTORS.map((doc, idx) => {
+                  const colors = [
+                    'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border-emerald-100',
+                    'bg-teal-50 text-teal-700 hover:bg-teal-100 border-teal-100',
+                    'bg-cyan-50 text-cyan-700 hover:bg-cyan-100 border-cyan-100',
+                    'bg-blue-50 text-blue-700 hover:bg-blue-100 border-blue-100',
+                    'bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border-indigo-100',
+                    'bg-violet-50 text-violet-700 hover:bg-violet-100 border-violet-100',
+                  ];
+                  return (
+                    <button
+                      key={doc.id}
+                      type="button"
+                      onClick={() => {
+                        setEmail(doc.email);
+                        setPassword('password123');
+                        toast.success(`${doc.name} credentials loaded!`);
+                      }}
+                      className={`text-[10px] font-bold py-2 rounded-lg active:scale-95 transition-all text-center border cursor-pointer ${colors[idx % colors.length]}`}
+                    >
+                      {doc.name}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           )}
 

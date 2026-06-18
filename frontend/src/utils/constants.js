@@ -78,7 +78,7 @@ export const INITIAL_DOCTORS = [
     email: "amit.verma@smartcare.com",
     phone: "9876543214",
     availability: "Mon to Sat (9:00 AM - 5:00 PM)",
-    imageUrl: "https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&q=80&w=400"
+    imageUrl: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400"
   },
   {
     id: 6,

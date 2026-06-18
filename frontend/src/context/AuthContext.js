@@ -39,9 +39,14 @@ export const AuthProvider = ({ children }) => {
     // 3. Remove Authorization header from axios
     delete axios.defaults.headers.common['Authorization'];
 
-    // 4. Clear React state — triggers ProtectedRoute to redirect
+    // 4. Clear React state
     setToken(null);
     setUser(null);
+
+    // 5. Force a hard redirect to the home page (bypasses router issues and clears memory)
+    setTimeout(() => {
+      window.location.replace('/');
+    }, 10);
   }, []);
 
   // ── Login ──
