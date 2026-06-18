@@ -170,11 +170,11 @@ export default function BookAppointment({ onMenuClick }) {
   if (loading) {
     return (
       <div className="min-h-screen flex bg-[#F8FAFC]">
-      <div className="hidden md:block">
-        <Sidebar />
-      </div>
-      <div className="flex-1 flex flex-col min-w-0">
-          <Topbar title="Booking Consultation..." />
+        <div className="hidden md:block">
+          <Sidebar />
+        </div>
+        <div className="flex-1 flex flex-col min-w-0">
+          <Topbar title="Booking Consultation..." onMenuClick={onMenuClick} />
           <div className="flex-1 flex items-center justify-center p-6 bg-slate-50/50">
             <Loader size="large" text="Syncing medical rosters..." />
           </div>
@@ -197,7 +197,9 @@ export default function BookAppointment({ onMenuClick }) {
 
     return (
       <div className="flex h-screen bg-slate-100 font-sans animate-fade-in" id="sc-booking-success-root">
-        <Sidebar />
+        <div className="hidden md:block">
+          <Sidebar />
+        </div>
 
         <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
           <Topbar title="Booking Confirmed" />
@@ -605,13 +607,17 @@ The SmartCare Clinical Operations Team`
                     
                     <div className="relative aspect-video rounded-xl overflow-hidden border border-gray-200 bg-white">
                       <img
-                        src={getDoctorPhoto(selectedDoctorObj.name)}
+                        src={getDoctorPhoto(selectedDoctorObj.name, selectedDoctorObj.gender)}
                         alt={selectedDoctorObj.name}
                         className="w-full h-full object-cover object-top"
                         referrerPolicy="no-referrer"
                         onError={(e) => {
                           e.target.onerror = null;
-                          e.target.src = getDoctorPhoto(selectedDoctorObj.name);
+                          const isFemale = selectedDoctorObj.gender?.toLowerCase() === 'female' ||
+                            ['priya','meera','sarah','nair'].some(n => selectedDoctorObj.name?.toLowerCase().includes(n));
+                          e.target.src = isFemale
+                            ? 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400'
+                            : 'https://images.unsplash.com/photo-1622902046580-2b47f47f5471?auto=format&fit=crop&q=80&w=400';
                         }}
                       />
                     </div>

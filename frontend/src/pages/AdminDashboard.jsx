@@ -417,13 +417,17 @@ export default function AdminDashboard({ onMenuClick }) {
                     <div className="flex items-center gap-3.5 min-w-0">
                       <div className="w-12 h-12 rounded-xl overflow-hidden bg-white border border-slate-100 shrink-0 shadow-2xs">
                         <img 
-                          src={getDoctorPhoto(doc.name)} 
+                          src={getDoctorPhoto(doc.name, doc.gender)} 
                           className="w-full h-full object-cover object-top" 
                           alt={doc.name} 
                           referrerPolicy="no-referrer"
                           onError={(e) => {
                             e.target.onerror = null;
-                            e.target.src = getDoctorPhoto(doc.name);
+                            const isFem = doc.gender?.toLowerCase() === 'female' ||
+                              ['priya','meera','sarah','nair'].some(n => doc.name?.toLowerCase().includes(n));
+                            e.target.src = isFem
+                              ? 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400'
+                              : 'https://images.unsplash.com/photo-1622902046580-2b47f47f5471?auto=format&fit=crop&q=80&w=400';
                           }}
                         />
                       </div>

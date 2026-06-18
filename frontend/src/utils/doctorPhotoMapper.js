@@ -12,9 +12,9 @@ export const DOCTOR_PHOTOS_MAPPING = {
   "Arvind Sharma": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400",
 
   // Dr. Priya Patel - Professional Female Doctor with clean blueish/white clinical background
-  "Dr. Priya Patel": "https://images.unsplash.com/photo-1594824813573-246434e33963?auto=format&fit=crop&q=80&w=400",
-  "Priya Patel": "https://images.unsplash.com/photo-1594824813573-246434e33963?auto=format&fit=crop&q=80&w=400",
-  "Dr. Priya": "https://images.unsplash.com/photo-1594824813573-246434e33963?auto=format&fit=crop&q=80&w=400",
+  "Dr. Priya Patel": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400",
+  "Priya Patel": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400",
+  "Dr. Priya": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400",
 
   // Dr. Meera Nair - Female pediatrician
   "Dr. Meera Nair": "https://images.unsplash.com/photo-1591604021695-0c69b7c05981?auto=format&fit=crop&q=80&w=400",

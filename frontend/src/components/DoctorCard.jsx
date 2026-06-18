@@ -4,8 +4,13 @@ import { motion } from 'motion/react';
 import { getDoctorPhoto } from '../utils/doctorPhotoMapper';
 
 export default function DoctorCard({ doctor, onBookClick }) {
-  const { id, name, specialization, qualification, experience, availability } = doctor;
-  const imageUrl = getDoctorPhoto(name);
+  const { id, name, specialization, qualification, experience, availability, gender } = doctor;
+  const imageUrl = getDoctorPhoto(name, gender);
+  const isFemaleDoctor = gender?.toLowerCase() === 'female' ||
+    ['priya','meera','sarah','nair','dsouza'].some(n => name?.toLowerCase().includes(n));
+  const fallbackPhoto = isFemaleDoctor
+    ? 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400'
+    : 'https://images.unsplash.com/photo-1622902046580-2b47f47f5471?auto=format&fit=crop&q=80&w=400';
 
   return (
     <motion.div
@@ -21,7 +26,7 @@ export default function DoctorCard({ doctor, onBookClick }) {
           alt={name}
           className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
           referrerPolicy="no-referrer"
-          onError={(e) => { e.target.onerror = null; e.target.src = imageUrl; }}
+          onError={(e) => { e.target.onerror = null; e.target.src = fallbackPhoto; }}
         />
         <div className="sc-doctor-img-overlay" />
 
