@@ -21,23 +21,23 @@ public class QueueController {
     }
 
     @PutMapping("/next")
-    public ResponseEntity<Queue> callNext(@RequestBody Map<String, Long> payload) {
-        Long doctorId = payload.get("doctorId");
+    public ResponseEntity<Queue> callNext(@RequestBody Map<String, Object> payload) {
+        Long doctorId = Long.valueOf(payload.get("doctorId").toString());
         return ResponseEntity.ok(queueService.nextPatient(doctorId));
     }
 
     @PutMapping("/complete")
     public ResponseEntity<Void> completeConsultation(@RequestBody Map<String, Object> payload) {
-        Long doctorId = (Long) payload.get("doctorId");
-        Integer tokenNumber = (Integer) payload.get("tokenNumber");
+        Long doctorId = Long.valueOf(payload.get("doctorId").toString());
+        Integer tokenNumber = Integer.valueOf(payload.get("tokenNumber").toString());
         queueService.completeConsultation(doctorId, tokenNumber);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/skip")
     public ResponseEntity<Void> skipPatient(@RequestBody Map<String, Object> payload) {
-        Long doctorId = (Long) payload.get("doctorId");
-        Integer tokenNumber = (Integer) payload.get("tokenNumber");
+        Long doctorId = Long.valueOf(payload.get("doctorId").toString());
+        Integer tokenNumber = Integer.valueOf(payload.get("tokenNumber").toString());
         queueService.skipPatient(doctorId, tokenNumber);
         return ResponseEntity.ok().build();
     }
