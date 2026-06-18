@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-export default function DoctorDashboard() {
+export default function DoctorDashboard({ onMenuClick }) {
   const { user } = useAuth();
   const [queues, setQueues] = useState([]);
   const [appointments, setAppointments] = useState([]);

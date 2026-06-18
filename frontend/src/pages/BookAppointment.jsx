@@ -15,7 +15,7 @@ import { Calendar, User, Clock, AlertCircle, Bookmark, ClipboardList, CheckCircl
 import { motion } from 'motion/react';
 import toast from 'react-hot-toast';
 
-export default function BookAppointment() {
+export default function BookAppointment({ onMenuClick }) {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
