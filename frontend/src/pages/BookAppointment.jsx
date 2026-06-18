@@ -613,11 +613,16 @@ The SmartCare Clinical Operations Team`
                         referrerPolicy="no-referrer"
                         onError={(e) => {
                           e.target.onerror = null;
-                          const isFemale = selectedDoctorObj.gender?.toLowerCase() === 'female' ||
-                            ['priya','meera','sarah','nair'].some(n => selectedDoctorObj.name?.toLowerCase().includes(n));
+                          const nameLower = selectedDoctorObj.name?.toLowerCase() || '';
+                          const isMale = selectedDoctorObj.gender?.toLowerCase() === 'male' ||
+                            ['amit','verma','arvind','rajesh'].some(n => nameLower.includes(n));
+                          const isFemale = !isMale && (
+                            selectedDoctorObj.gender?.toLowerCase() === 'female' ||
+                            ['priya','meera','sarah','nair'].some(n => nameLower.includes(n))
+                          );
                           e.target.src = isFemale
                             ? 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400'
-                            : 'https://images.unsplash.com/photo-1622902046580-2b47f47f5471?auto=format&fit=crop&q=80&w=400';
+                            : 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400';
                         }}
                       />
                     </div>

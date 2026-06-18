@@ -423,11 +423,16 @@ export default function AdminDashboard({ onMenuClick }) {
                           referrerPolicy="no-referrer"
                           onError={(e) => {
                             e.target.onerror = null;
-                            const isFem = doc.gender?.toLowerCase() === 'female' ||
-                              ['priya','meera','sarah','nair'].some(n => doc.name?.toLowerCase().includes(n));
+                            const nl = doc.name?.toLowerCase() || '';
+                            const isMale = doc.gender?.toLowerCase() === 'male' ||
+                              ['amit','verma','arvind','rajesh'].some(n => nl.includes(n));
+                            const isFem = !isMale && (
+                              doc.gender?.toLowerCase() === 'female' ||
+                              ['priya','meera','sarah','nair'].some(n => nl.includes(n))
+                            );
                             e.target.src = isFem
                               ? 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400'
-                              : 'https://images.unsplash.com/photo-1622902046580-2b47f47f5471?auto=format&fit=crop&q=80&w=400';
+                              : 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400';
                           }}
                         />
                       </div>

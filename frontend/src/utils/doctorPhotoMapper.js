@@ -25,8 +25,10 @@ export const DOCTOR_PHOTOS_MAPPING = {
   // Dr. Rajesh K. - Male orthopedic surgeon
   "Dr. Rajesh K.": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400",
 
-  // Dr. Amit Verma - Male general physician
-  "Dr. Amit Verma": "https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&q=80&w=400"
+  // Dr. Amit Verma - Male general physician (verified male portrait)
+  "Dr. Amit Verma": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400",
+  "Amit Verma": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400",
+  "Dr. Amit": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400"
 };
 
 /**
@@ -56,13 +58,22 @@ export function getDoctorPhoto(doctorName, gender) {
 
   // Fallback heuristic based on common gender indicators or explicit parameter
   const nameLower = cleanedName.toLowerCase();
-  const isFemale = 
+
+  // Explicit male name markers — these always get male portrait
+  const isMale =
+    gender?.toLowerCase() === "male" ||
+    nameLower.includes("amit") ||
+    nameLower.includes("arvind") ||
+    nameLower.includes("rajesh");
+
+  if (isMale) return MALE_DOCTOR_PORTRAIT;
+
+  const isFemale =
     gender?.toLowerCase() === "female" ||
-    nameLower.includes("priya") || 
-    nameLower.includes("meera") || 
+    nameLower.includes("priya") ||
+    nameLower.includes("meera") ||
     nameLower.includes("sarah") ||
     nameLower.includes("nair") ||
-    nameLower.includes("patel") || // In the default seed, Patel is Priya Patel
     nameLower.includes("dsouza");
 
   return isFemale ? FEMALE_DOCTOR_PORTRAIT : MALE_DOCTOR_PORTRAIT;

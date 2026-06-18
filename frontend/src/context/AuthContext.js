@@ -30,22 +30,18 @@ export const AuthProvider = ({ children }) => {
 
   // ── Complete logout ──
   const logout = useCallback(() => {
-    // 1. Clear localStorage
-    localStorage.removeItem('sc_token');
-    localStorage.removeItem('sc_user');
+    // 1. Wipe ALL localStorage (no stale keys left behind)
+    localStorage.clear();
 
-    // 2. Clear sessionStorage
+    // 2. Wipe ALL sessionStorage
     sessionStorage.clear();
 
-    // 3. Remove Authorization header
+    // 3. Remove Authorization header from axios
     delete axios.defaults.headers.common['Authorization'];
 
-    // 4. Clear React state
+    // 4. Clear React state — triggers ProtectedRoute to redirect
     setToken(null);
     setUser(null);
-
-    // 5. Push a history entry so the back button lands on home not a dashboard
-    //    (navigation handled by the calling component with replace:true)
   }, []);
 
   // ── Login ──

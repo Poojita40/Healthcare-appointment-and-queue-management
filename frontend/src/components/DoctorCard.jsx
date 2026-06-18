@@ -6,11 +6,16 @@ import { getDoctorPhoto } from '../utils/doctorPhotoMapper';
 export default function DoctorCard({ doctor, onBookClick }) {
   const { id, name, specialization, qualification, experience, availability, gender } = doctor;
   const imageUrl = getDoctorPhoto(name, gender);
-  const isFemaleDoctor = gender?.toLowerCase() === 'female' ||
-    ['priya','meera','sarah','nair','dsouza'].some(n => name?.toLowerCase().includes(n));
+  const nameLower = name?.toLowerCase() || '';
+  const isMaleDoctor = gender?.toLowerCase() === 'male' ||
+    ['amit','verma','arvind','rajesh'].some(n => nameLower.includes(n));
+  const isFemaleDoctor = !isMaleDoctor && (
+    gender?.toLowerCase() === 'female' ||
+    ['priya','meera','sarah','nair','dsouza'].some(n => nameLower.includes(n))
+  );
   const fallbackPhoto = isFemaleDoctor
     ? 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400'
-    : 'https://images.unsplash.com/photo-1622902046580-2b47f47f5471?auto=format&fit=crop&q=80&w=400';
+    : 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400';
 
   return (
     <motion.div
