@@ -89,6 +89,6 @@ export const INITIAL_DOCTORS = [
     email: "priya.patel@smartcare.com",
     phone: "9876543215",
     availability: "Tue, Fri (1:00 PM - 5:00 PM)",
-    imageUrl: "https://images.unsplash.com/photo-1594824813573-246434e33963?auto=format&fit=crop&q=80&w=400"
+    imageUrl: "https://images.unsplash.com/photo-1614608682850-e0e6edc961dc?auto=format&fit=crop&q=80&w=400"
   }
 ];
