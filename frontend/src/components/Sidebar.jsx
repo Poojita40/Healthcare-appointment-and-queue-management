@@ -22,7 +22,7 @@ export default function Sidebar({ onClose }) {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   const patientLinks = [

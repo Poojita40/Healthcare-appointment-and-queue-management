@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, { createContext, useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from '../utils/constants';
 
@@ -6,47 +6,62 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('sc_token') || null);
+  const [token, setToken] = useState(() => localStorage.getItem('sc_token') || null);
   const [loading, setLoading] = useState(true);
 
-  // Inactivity logout setup
-  const INACTIVITY_TIMEOUT = 5 * 60 * 1000; // 5 minutes
-  let inactivityTimer;
-
-  const resetTimer = () => {
-    if (inactivityTimer) clearTimeout(inactivityTimer);
-    inactivityTimer = setTimeout(() => {
-      // Auto logout on inactivity
-      logout();
-    }, INACTIVITY_TIMEOUT);
-  };
-
+  // ── Restore session from localStorage on mount ──
   useEffect(() => {
-    // Setup activity listeners
-    const events = ['mousemove', 'mousedown', 'keydown', 'touchstart', 'click'];
-    events.forEach((e) => window.addEventListener(e, resetTimer));
-    // Start timer initially
-    resetTimer();
-    return () => {
-      // Cleanup listeners and timer
-      events.forEach((e) => window.removeEventListener(e, resetTimer));
-      if (inactivityTimer) clearTimeout(inactivityTimer);
-    };
+    const storedToken = localStorage.getItem('sc_token');
+    const storedUser = localStorage.getItem('sc_user');
+    if (storedToken && storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setToken(storedToken);
+        setUser(parsedUser);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
+      } catch {
+        // Corrupt storage — wipe it
+        localStorage.removeItem('sc_token');
+        localStorage.removeItem('sc_user');
+      }
+    }
+    setLoading(false);
   }, []);
 
+  // ── Complete logout ──
+  const logout = useCallback(() => {
+    // 1. Clear localStorage
+    localStorage.removeItem('sc_token');
+    localStorage.removeItem('sc_user');
+
+    // 2. Clear sessionStorage
+    sessionStorage.clear();
+
+    // 3. Remove Authorization header
+    delete axios.defaults.headers.common['Authorization'];
+
+    // 4. Clear React state
+    setToken(null);
+    setUser(null);
+
+    // 5. Push a history entry so the back button lands on home not a dashboard
+    //    (navigation handled by the calling component with replace:true)
+  }, []);
+
+  // ── Login ──
   const login = async (email, password) => {
     setLoading(true);
     try {
       const response = await axios.post(`${API_BASE_URL}/auth/login`, { email, password });
       const { token: receivedToken, user: loggedUser } = response.data;
-      
+
       localStorage.setItem('sc_token', receivedToken);
       localStorage.setItem('sc_user', JSON.stringify(loggedUser));
-      
+
+      axios.defaults.headers.common['Authorization'] = `Bearer ${receivedToken}`;
+
       setToken(receivedToken);
       setUser(loggedUser);
-      
-      axios.defaults.headers.common['Authorization'] = `Bearer ${receivedToken}`;
       setLoading(false);
       return loggedUser;
     } catch (error) {
@@ -55,6 +70,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ── Register ──
   const register = async (userData) => {
     setLoading(true);
     try {
@@ -67,14 +83,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('sc_token');
-    localStorage.removeItem('sc_user');
-    setToken(null);
-    setUser(null);
-    delete axios.defaults.headers.common['Authorization'];
-  };
-
+  // ── Update profile ──
   const updateProfile = async (profileData) => {
     try {
       const response = await axios.put(`${API_BASE_URL}/patients/${user.id}`, profileData);
@@ -87,15 +96,33 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ── Inactivity auto-logout (15 min) ──
+  useEffect(() => {
+    if (!token) return;
+    const TIMEOUT = 15 * 60 * 1000;
+    let timer;
+    const reset = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => logout(), TIMEOUT);
+    };
+    const events = ['mousemove', 'mousedown', 'keydown', 'touchstart', 'click', 'scroll'];
+    events.forEach((e) => window.addEventListener(e, reset, { passive: true }));
+    reset();
+    return () => {
+      clearTimeout(timer);
+      events.forEach((e) => window.removeEventListener(e, reset));
+    };
+  }, [token, logout]);
+
   const val = {
     user,
     token,
     loading,
-    isAuthenticated: !!token,
+    isAuthenticated: !!token && !!user,
     login,
     register,
     logout,
-    updateProfile
+    updateProfile,
   };
 
   return React.createElement(AuthContext.Provider, { value: val }, children);
@@ -103,8 +130,6 @@ export const AuthProvider = ({ children }) => {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
+  if (!context) throw new Error('useAuth must be used within an AuthProvider');
   return context;
 };

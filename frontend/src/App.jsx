@@ -28,18 +28,18 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="text-center space-y-4">
           <div className="w-10 h-10 border-4 border-sky-100 border-t-sky-500 rounded-full animate-spin mx-auto" />
-          <p className="text-xs text-gray-500 font-bold font-display">Authorizing session credentials...</p>
+          <p className="text-xs text-gray-500 font-bold font-display">Authorizing session...</p>
         </div>
       </div>
     );
   }
 
   if (!isAuthenticated) {
+    // Replace prevents back-button returning to protected page
     return <Navigate to="/login" replace />;
   }
 
   if (allowedRoles && !allowedRoles.includes(user?.role)) {
-    // Redirect to home or standard dashboard depending on user role
     if (user?.role === 'ADMIN') return <Navigate to="/admin-dashboard" replace />;
     if (user?.role === 'DOCTOR') return <Navigate to="/doctor-dashboard" replace />;
     return <Navigate to="/patient-dashboard" replace />;
