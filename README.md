@@ -1,111 +1,377 @@
-# SmartCare – Smart Healthcare. Seamless Appointments. Digital Queue Management.
+<div align="center">
 
-SmartCare is a premium, full-stack Healthcare Appointment scheduling and dynamic Queue Management System. It replaces traditional patient waiting lobbies with real-time digital consultation tracking, sequantial SC-coded tokens, and comprehensive role-based dashboards for Patients, Doctors, and Administrators.
+# SmartCare
+
+### Healthcare Appointment & Queue Management System
+
+A full-stack web application designed to digitize medical appointments, streamline healthcare workflows, and improve patient experience through live queue tracking and role-based management.
+
+<p align="center">
+  <a href="https://smartcare-healthcare-appointment-an.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/🚀_Live_Demo-Visit_Now-0ea5e9?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"/>
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Poojita40/smartcare-appointment-queue-management" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github" alt="GitHub Repository"/>
+  </a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Active-success.svg?style=flat-square" alt="Status">
+  <img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React">
+  <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=spring&logoColor=white" alt="Spring Boot">
+  <img src="https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white" alt="Java">
+  <img src="https://img.shields.io/badge/H2_Database-005C84?style=flat-square" alt="H2 Database">
+  <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel">
+  <img src="https://img.shields.io/badge/Render-46E3B7?style=flat-square&logo=render&logoColor=white" alt="Render">
+</p>
+
+</div>
 
 ---
 
-## 🚀 Key Architectural Strengths
+# 🌐 Live Demo
 
-### 1. Unified Full Stack Topology
-*   **Web Portal**: Designed using modern React with ESM JavaScript, styled with Tailwind CSS, and animated with Framer Motion transitions. The design employs a high-contrast Medical Blue, Emerald Green, and Warm White glassmorphism aesthetic.
-*   **Fullstack Gateway**: Express + Vite proxy routing engine to feed JSON packets dynamically during local execution.
-*   **Production Microservice**: Modular Spring Boot architecture with Spring Data JPA persistence and JWT Security profiles.
+### 🚀 Explore SmartCare
 
-### 2. High-Fidelity Queue Mathematics
-*   **SC-Coded Tokens**: Assigned sequentially (e.g., `SC001`, `SC002`) based on the reservation queue status of the designated specialist.
-*   **Dynamic Metrics**: Real-time evaluation of estimated wait times (configured at 15 minutes per patient) and live updates as clinicians trigger "Call Next Patient" from their portals.
+https://smartcare-healthcare-appointment-an.vercel.app/
 
 ---
 
-## 📂 Complete Project Structure
+# 📖 Project Overview
+
+SmartCare is a healthcare appointment and queue management platform developed to simplify appointment scheduling and optimize healthcare operations.
+
+The platform enables patients to book appointments online, receive queue tokens, track appointment status, and monitor queue progression. Clinical staff and administrators can efficiently manage appointments, patient information, schedules, and queue operations through dedicated dashboards.
+
+The system helps reduce waiting times, improve transparency, and enhance the overall healthcare experience.
+
+---
+
+# ❗ Problem Statement
+
+Traditional healthcare facilities often face several challenges:
+
+* Long patient waiting times
+* Overcrowded waiting rooms
+* Lack of appointment visibility
+* Manual scheduling processes
+* Administrative inefficiencies
+* Difficulty managing patient queues and doctor availability
+
+These challenges impact both healthcare providers and patients, reducing operational efficiency and patient satisfaction.
+
+---
+
+# 💡 Solution
+
+SmartCare provides a digital healthcare management solution that enables:
+
+* Online appointment booking
+* Automated queue token generation
+* Live queue tracking
+* Appointment status monitoring
+* Secure role-based access
+* Centralized management of healthcare workflows
+
+Patients can monitor their queue status remotely and arrive closer to their consultation time, minimizing unnecessary waiting.
+
+---
+
+# ✨ Features
+
+## 👨‍⚕️ Patient Features
+
+* Patient Registration
+* Secure Login
+* Appointment Booking
+* Queue Token Generation
+* Queue Tracking
+* Appointment Status Monitoring
+* Email Notifications
+
+### Patient Workflow
 
 ```text
-/
-├── backend/                       # Java Spring Boot Microservice
-│   ├── controller/                # AuthController, QueueController, PatientController...
-│   ├── model/                     # JPA Entities (User, Doctor, Appointment, Queue)
-│   ├── repository/                # Spring JpaRepositories
-│   ├── service/                   # AuthService, QueueService, AppointmentService, EmailService
-│   ├── security/                  # JwtAuthenticationFilter, JwtUtil, SecurityConfig
-│   ├── dto/                       # LoginRequest, RegisterRequest DTOs
-│   ├── exception/                 # GlobalExceptionHandler advice
-│   ├── config/                    # CorsConfig configurations
-│   ├── SmartcareApplication.java  # Main Boot loader class
-│   └── application.yml            # Core database & port configurations
-│
-├── src/                           # React Interactive client
-│   ├── components/                # Navbar, Sidebar, Topbar, DoctorCard, QueueStatusCard...
-│   ├── context/                   # AuthContext sessions provider
-│   ├── pages/                     # Home, Services, About, Login, Register, Dashboards...
-│   ├── services/                  # axios configuration, doctorService, queueService...
-│   ├── utils/                     # constants (doctors catalogs), helper formatting utils
-│   ├── App.jsx                    # Primary Router and Protected Router Guards
-│   ├── index.css                  # Tailwind variables & Google Font linkages
-│   └── main.jsx                   # React bootloader
-│
-│── package.json                   # Full-stack Node package manifest
-│── server.ts                      # Express API mock server (Active on Sandbox preview)
-└── POSTMAN_COLLECTION.json        # Unified API request collections for developers
+Register
+   ↓
+Login
+   ↓
+Book Appointment
+   ↓
+Receive Queue Token
+   ↓
+Track Queue Status
 ```
 
 ---
 
-## 📡 Complete REST API Endpoints Registry
+## 👩‍⚕️ Clinical Staff Features
 
-| End Point | Method | Required Scope / Auth | Description |
-| :--- | :--- | :--- | :--- |
-| `/api/auth/register` | `POST` | Public | Registers a new patient profile inside the persistent database |
-| `/api/auth/login` | `POST` | Public | Submits credentials and yields a persistent Authorization JWT Bearer Token |
-| `/api/doctors` | `GET` | Public | Retrieves roster records for all clinical departments |
-| `/api/doctors` | `POST` | Admin Only | Appends a new medical officer card |
-| `/api/doctors/{id}` | `DELETE`| Admin Only | Purges a doctor from active medical registers |
-| `/api/appointments` | `POST` | Patient / JWT | Schedules a consultation and issues a sequential `SC` queue token |
-| `/api/appointments` | `GET` | JWT Checked | Filters active appointments by `patientId` or `doctorId` |
-| `/api/queue` | `GET` | Public / JWT | Fetches active diagnostic queue levels for clinical rooms |
-| `/api/queue/next` | `PUT` | Doctor / JWT | Increments status to NEXT patient, alerting client portals |
-| `/api/queue/complete`| `PUT` | Doctor / JWT | Moves currently consulting token status to `COMPLETED` |
-| `/api/queue/skip` | `PUT` | Doctor / JWT | Flags patient as absent, moving active token status to `SKIPPED` |
+* Secure Login
+* View Assigned Appointments
+* Access Patient Details
+* Manage Queue Progression
+* Update Appointment Status
+* Complete Consultations
 
----
+### Clinical Staff Workflow
 
-## 💾 Core Persistence Schemes
-
-### 1. In-Memory Development Database (H2)
-The development profile has active H2 support for fast data cycle testing.
-*   **H2 Endpoint Console**: `http://localhost:8080/h2-console`
-*   **JDBC Driver Class**: `org.h2.Driver`
-*   **JDBC Database URL**: `jdbc:h2:mem:smartcare_db`
-*   **Superuser Creds**: `username: sa`, `password: password`
-
-### 2. Production Database (MySQL)
-To switch to a persistent database engine (e.g. MySQL) in production environments:
-1.  Uncomment the MySQL parameters inside `backend/application.yml`.
-2.  Enable the corresponding connector dependency in Maven `pom.xml`.
-3.  Set database schemas to self-generate or ddl-update.
+```text
+Login
+   ↓
+View Appointments
+   ↓
+Review Patient Information
+   ↓
+Update Status
+   ↓
+Complete Consultation
+```
 
 ---
 
-## 🛠️ Step-By-Step Development Execution
+## 🛡️ Admin Features
 
-### Part 1: Booting the Frontend Client & Proxy Server
-1.  Verify the Node.js packages are resolved:
-    ```bash
-    npm install
-    ```
-2.  Start the development server:
-    ```bash
-    npm run dev
-    ```
-    *This runs the full Express API layer on port `3000` alongside Vite, giving you a functional real-time testing sandbox.*
+* Patient Management
+* Clinical Staff Management
+* Appointment Management
+* Queue Administration
+* System Monitoring
+* Administrative Controls
 
-### Part 2: Starting the Spring Java Microservice
-1.  Move into your Spring Boot directory.
-2.  Build and package executable components using Maven wrapper protocols:
-    ```bash
-    mvn clean package
-    ```
-3.  Boot up the application:
-    ```bash
-    mvn spring-boot:run
-    ```
-    *The Java backend launches on standard port `8080`, supporting active database updates and API requests.*
+### Admin Workflow
+
+```text
+Login
+   ↓
+Manage Patients
+   ↓
+Manage Staff
+   ↓
+Manage Appointments
+   ↓
+Manage Queue
+```
+
+---
+
+## 💻 System Features
+
+* Role-Based Access Control
+* Queue Management
+* Appointment Scheduling
+* Live Queue Tracking
+* Email Notifications
+* Secure Authentication
+* Dashboard Management
+* Responsive User Interface
+
+---
+
+# 👥 User Roles
+
+| Role                 | Responsibilities                                           |
+| -------------------- | ---------------------------------------------------------- |
+| 👨‍⚕️ Patient        | Register, Login, Book Appointments, Track Queue            |
+| 👩‍⚕️ Clinical Staff | Manage Appointments, Update Status, Complete Consultations |
+| 🛡️ Admin            | Manage Patients, Staff, Appointments, Queue                |
+| 💻 Developer         | Testing, Monitoring, Maintenance                           |
+
+---
+
+# 🛠️ Technology Stack
+
+| Category        | Technologies                                           |
+| --------------- | ------------------------------------------------------ |
+| Frontend        | React.js, Vite, Material UI (MUI), Tailwind CSS, Axios |
+| Backend         | Java, Spring Boot 3, Spring Security, Spring Data JPA  |
+| Database        | H2 Database                                            |
+| Authentication  | Role-Based Access Control                              |
+| Deployment      | Vercel, Render                                         |
+| Version Control | Git, GitHub                                            |
+
+---
+
+# 🏗️ System Architecture
+
+```mermaid
+graph TD
+
+A[Patient / Staff / Admin Browser]
+--> B[React Frontend]
+
+B --> C[REST API Calls]
+
+C --> D[Spring Boot Backend]
+
+D --> E[Spring Security]
+
+E --> F[Controllers]
+
+F --> G[Service Layer]
+
+G --> H[JPA Repositories]
+
+H --> I[(H2 Database)]
+```
+
+---
+
+# 📂 Project Structure
+
+```text
+📦 SmartCare
+│
+├── 📂 backend
+│   ├── 📂 controller
+│   ├── 📂 service
+│   ├── 📂 repository
+│   ├── 📂 model
+│   ├── 📂 dto
+│   ├── 📂 config
+│   ├── 📂 security
+│   └── 📜 pom.xml
+│
+├── 📂 frontend
+│   ├── 📂 public
+│   ├── 📂 src
+│   │   ├── 📂 components
+│   │   ├── 📂 pages
+│   │   ├── 📂 services
+│   │   ├── 📂 context
+│   │   ├── 📂 assets
+│   │   └── 📂 layouts
+│   │
+│   ├── 📜 package.json
+│   └── 📜 vite.config.js
+│
+└── 📜 README.md
+```
+
+---
+
+# 🔗 Quick Access
+
+### 🌐 Live Application
+
+https://smartcare-healthcare-appointment-an.vercel.app/
+
+### 📂 GitHub Repository
+
+https://github.com/Poojita40/smartcare-appointment-queue-management
+
+---
+
+# ⚙️ Installation Guide
+
+## Prerequisites
+
+* Java JDK 17+
+* Maven 3.8+
+* Node.js 18+
+* Git
+
+### Clone Repository
+
+```bash
+git clone https://github.com/Poojita40/smartcare-appointment-queue-management.git
+cd smartcare-appointment-queue-management
+```
+
+### Backend Setup
+
+```bash
+cd backend
+mvn clean install
+mvn spring-boot:run
+```
+
+Backend URL:
+
+```text
+http://localhost:8081
+```
+
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend URL:
+
+```text
+http://localhost:5173
+```
+
+---
+
+# 🔒 Security Features
+
+* Role-Based Access Control (RBAC)
+* Protected Routes
+* Session Management
+* BCrypt Password Encryption
+* Input Validation
+* CORS Protection
+* Secure Authentication
+
+---
+
+# 🎯 Project Objectives
+
+* Reduce patient waiting times
+* Improve healthcare operational efficiency
+* Digitize appointment workflows
+* Provide queue transparency
+* Simplify administrative operations
+* Enhance patient experience
+
+---
+
+# 🚀 Future Enhancements
+
+* WebSocket-Based Real-Time Queue Updates
+* Telemedicine Integration
+* Online Payment Gateway
+* Digital Prescriptions
+* Medical Records Management
+* SMS Notifications
+* Multi-Hospital Support
+* Analytics Dashboard
+
+---
+
+# 👩‍💻 Developer
+
+### Poojita Lakkakula
+
+B.Tech Computer Science Student
+Anurag University
+
+### GitHub
+
+https://github.com/Poojita40
+
+### Repository
+
+https://github.com/Poojita40/smartcare-appointment-queue-management
+
+### Live Demo
+
+https://smartcare-healthcare-appointment-an.vercel.app/
+
+---
+
+<div align="center">
+
+### SmartCare — Making Healthcare Appointments Smarter and Simpler
+
+Made with by Poojita Lakkakula
+
+</div>
