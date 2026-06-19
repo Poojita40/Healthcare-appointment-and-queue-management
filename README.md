@@ -32,14 +32,6 @@ A full-stack web application designed to digitize medical appointments, streamli
 
 ---
 
-# 🌐 Live Demo
-
-### 🚀 Explore SmartCare
-
-https://smartcare-healthcare-appointment-an.vercel.app/
-
----
-
 # 📖 Project Overview
 
 SmartCare is a healthcare appointment and queue management platform developed to simplify appointment scheduling and optimize healthcare operations.
@@ -178,7 +170,6 @@ Manage Queue
 | 👨‍⚕️ Patient        | Register, Login, Book Appointments, Track Queue            |
 | 👩‍⚕️ Clinical Staff | Manage Appointments, Update Status, Complete Consultations |
 | 🛡️ Admin            | Manage Patients, Staff, Appointments, Queue                |
-| 💻 Developer         | Testing, Monitoring, Maintenance                           |
 
 ---
 
@@ -197,25 +188,26 @@ Manage Queue
 
 # 🏗️ System Architecture
 
-```mermaid
-graph TD
-
-A[Patient / Staff / Admin Browser]
---> B[React Frontend]
-
-B --> C[REST API Calls]
-
-C --> D[Spring Boot Backend]
-
-D --> E[Spring Security]
-
-E --> F[Controllers]
-
-F --> G[Service Layer]
-
-G --> H[JPA Repositories]
-
-H --> I[(H2 Database)]
+```text
+Patient / Staff / Admin
+          │
+          ▼
+   React Frontend
+          │
+          ▼
+      REST APIs
+          │
+          ▼
+ Spring Boot Backend
+          │
+          ▼
+    Service Layer
+          │
+          ▼
+  JPA Repositories
+          │
+          ▼
+      H2 Database
 ```
 
 ---
@@ -253,18 +245,6 @@ H --> I[(H2 Database)]
 
 ---
 
-# 🔗 Quick Access
-
-### 🌐 Live Application
-
-https://smartcare-healthcare-appointment-an.vercel.app/
-
-### 📂 GitHub Repository
-
-https://github.com/Poojita40/smartcare-appointment-queue-management
-
----
-
 # ⚙️ Installation Guide
 
 ## Prerequisites
@@ -278,6 +258,7 @@ https://github.com/Poojita40/smartcare-appointment-queue-management
 
 ```bash
 git clone https://github.com/Poojita40/smartcare-appointment-queue-management.git
+
 cd smartcare-appointment-queue-management
 ```
 
@@ -285,7 +266,9 @@ cd smartcare-appointment-queue-management
 
 ```bash
 cd backend
+
 mvn clean install
+
 mvn spring-boot:run
 ```
 
@@ -299,7 +282,9 @@ http://localhost:8081
 
 ```bash
 cd frontend
+
 npm install
+
 npm run dev
 ```
 
@@ -351,20 +336,8 @@ http://localhost:5173
 
 ### Poojita Lakkakula
 
-B.Tech Computer Science Student
+B.Tech Data Science Student
 Anurag University
-
-### GitHub
-
-https://github.com/Poojita40
-
-### Repository
-
-https://github.com/Poojita40/smartcare-appointment-queue-management
-
-### Live Demo
-
-https://smartcare-healthcare-appointment-an.vercel.app/
 
 ---
 
@@ -372,6 +345,6 @@ https://smartcare-healthcare-appointment-an.vercel.app/
 
 ### SmartCare — Making Healthcare Appointments Smarter and Simpler
 
-Made with by Poojita Lakkakula
+Made with ❤️ by Poojita Lakkakula
 
 </div>
