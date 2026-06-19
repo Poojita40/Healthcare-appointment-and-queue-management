@@ -75,17 +75,19 @@ export default function Navbar() {
         <div className="flex justify-between h-16 items-center">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="bg-blue-600 text-white p-2 rounded-xl group-hover:bg-blue-700 transition-all shadow-md shadow-blue-100">
-              <Activity className="h-5 w-5" />
-            </div>
-            <span className="font-display text-xl font-bold tracking-tight text-gray-900">
-              Smart<span className="text-blue-600">Care</span>
-            </span>
-          </Link>
+          <div className="flex md:flex-1 justify-start">
+            <Link to="/" className="flex items-center gap-2 group">
+              <div className="bg-blue-600 text-white p-2 rounded-xl group-hover:bg-blue-700 transition-all shadow-md shadow-blue-100">
+                <Activity className="h-5 w-5" />
+              </div>
+              <span className="font-display text-xl font-bold tracking-tight text-gray-900">
+                Smart<span className="text-blue-600">Care</span>
+              </span>
+            </Link>
+          </div>
 
           {/* Desktop Nav links */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex md:flex-1 justify-center items-center space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -99,7 +101,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Auth buttons */}
-          <div className="hidden md:flex items-center space-x-3">
+          <div className="hidden md:flex md:flex-1 justify-end items-center space-x-3">
             {isAuthenticated ? (
               <div className="flex items-center space-x-3">
                 <button
